@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import Observation
 
-class ViewModel: ObservableObject {
-    @Published var notes: [Note]
+@Observable
+class ViewModel {
+    var notes: [Note]
     
     init(notes: [Note] = []) {
         self.notes = notes
