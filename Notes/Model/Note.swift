@@ -9,18 +9,18 @@ import Foundation
 
 struct Note: Identifiable, Hashable {
     let id: UUID
-    let tile: String
+    let title: String
     let text: String?
-    let creadAt: Date
+    let createdAt: Date
     
     var getText: String {
         text ?? ""
     }
     
-    init(id: UUID = UUID(), tile: String, text: String?, creadAt: Date = .now) {
+    init(id: UUID = UUID(), title: String, text: String?, createdAt: Date = .now) {
         self.id = id
-        self.tile = tile
+        self.title = title
         self.text = text
-        self.creadAt = creadAt
+        self.createdAt = createdAt
     }
 }

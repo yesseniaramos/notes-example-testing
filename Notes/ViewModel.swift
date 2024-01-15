@@ -17,13 +17,13 @@ class ViewModel {
     }
     
     func createNoteWith(title: String, text: String) {
-        let note: Note = .init(tile: title, text: text)
+        let note: Note = .init(title: title, text: text)
         notes.append(note)
     }
     
     func updateNoteWith(id:UUID, newTitle: String, newText: String) {
         if let index = notes.firstIndex(where: { $0.id == id }) {
-            let updatedNote = Note(id: id, tile: newTitle, text: newText, creadAt: notes[index].creadAt)
+            let updatedNote = Note(id: id, title: newTitle, text: newText, createdAt: notes[index].createdAt)
             notes[index] = updatedNote
         }
     }
