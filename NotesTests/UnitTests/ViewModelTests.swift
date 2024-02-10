@@ -13,11 +13,16 @@ final class ViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        viewModel = ViewModel()
+        viewModel = ViewModel(createNoteUseCase: CreateNoteUseCaseMock(),
+                                fetchAllNotesUseCase: FetchAllNotesUseCaseMock(),
+                              updateNoteUseCase: UpdateNoteUseCaseMock(),
+                              removeNoteUseCase: RemoveNoteUseCaseMock()
+        )
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        mockDatabase = []
     }
     
     func testCreateNote(){
@@ -74,8 +79,8 @@ final class ViewModelTests: XCTestCase {
         let newText = "New Text"
         
         // When
-        if let id = viewModel.notes.first?.id {
-            viewModel.updateNoteWith(id: id, newTitle: newTitle, newText: newText)
+        if let identifier = viewModel.notes.first?.identifier {
+            viewModel.updateNoteWith(identifier: identifier, newTitle: newTitle, newText: newText)
             
             // Then
             XCTAssertEqual(viewModel.notes.first?.title, newTitle)
@@ -94,9 +99,9 @@ final class ViewModelTests: XCTestCase {
 
         viewModel.createNoteWith(title: title, text: text)
         
-        if let id = viewModel.notes.first?.id {
+        if let identifier = viewModel.notes.first?.identifier {
             // When
-            viewModel.removeNoteWith(id: id)
+            viewModel.removeNoteWith(identifier: identifier)
             
             // Then
             XCTAssertTrue(viewModel.notes.isEmpty)
